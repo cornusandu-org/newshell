@@ -6,10 +6,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the wrapper script into the image
-COPY newshell /usr/local/bin/newshell
+COPY entrypoint.sh .
 
 # Ensure it is executable
-RUN chmod +x /usr/local/bin/newshell
+RUN chmod +x entrypoint.sh
 
 # Default command: open a Bash shell
+ENTRYPOINT ["./entrypoint.sh"]
+
 CMD ["/bin/bash"]
