@@ -1,9 +1,10 @@
-FROM debian:stable-slim
+FROM debian:stable
 
-# Install any minimal dependencies you might need (optional)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        sudo \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y nano && apt-get clean
+
+RUN apt-get update && apt-get install -y sudo && apt-get clean
+
+RUN apt-get update && apt-get install -y build-essential && apt-get clean
 
 # Copy the wrapper script into the image
 COPY entrypoint.sh .

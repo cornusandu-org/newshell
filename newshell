@@ -1,2 +1,63 @@
 #!/bin/sh
-sudo docker run --runtime=runsc -it newshell
+
+
+to_bytes() {
+    case "$1" in
+        *[gG]) echo $(( ${1%[gG]} * 1024 * 1024 * 1024 )) ;;
+        *[mM]) echo $(( ${1%[mM]} * 1024 * 1024 )) ;;
+        *[kK]) echo $(( ${1%[kK]} * 1024 )) ;;
+        *) echo "$1" ;;  # already a number
+    esac
+}
+
+
+cpu="0.5"
+memory="64m"
+mem_swap="256m"
+max_file_size="2g"
+stack_size="1m"
+
+# Parse arguments
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --cpu)
+            cpu="$2"; shift 2 ;;
+        --memory)
+            memory="$2"; shift 2 ;;
+        --swap|--mem-swap)
+            mem_swap="$2"; shift 2 ;;
+        --fsize|--file-size)
+            max_file_size="$2"; shift 2 ;;
+        --stack|--stack-size)
+            stack_size="$2"; shift 2 ;;
+        help)
+            echo "Usage: $0 [--cpu x] [--memory x] [--swap x] [--fsize x] [--stack x]"
+            exit 0 ;;
+        *)
+            echo "Warning: unknown option: $1"
+            shift ;;
+    esac
+done
+
+
+fsize_bytes=$(to_bytes "$max_file_size")
+stack_bytes=$(to_bytes "$stack_size")
+
+
+echo "Running container with:"
+echo "  CPU            = $cpu"
+echo "  Memory         = $memory"
+echo "  Swap           = $mem_swap"
+echo "  File size max  = $max_file_size  → $fsize_bytes bytes"
+echo "  Stack size max = $stack_size     → $stack_bytes bytes"
+echo ""
+
+sudo docker run --runtime=runsc -it \
+    --cpus="$cpu" \
+    --cpu-shares="1024" \
+    --memory="$memory" \
+    --memory-swap="$mem_swap" \
+    --ulimit nproc=256 \
+    --ulimit fsize="$fsize_bytes" \
+    --ulimit stack="$stack_bytes" \
+    new_shell
