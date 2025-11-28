@@ -75,8 +75,8 @@ Too see what arguments newshell takes, run: `newshell help`.
 ### Switching between accounts
 By default, each instance contains three users:
 * `root`: Standard root, full privilege
-* `user`: Default privilege, password-protected (`123456`)
-* `anonymous`: Default privilege, no password
+* `user`: Default privilege, password-protected (`123456`), `sudo` privilege
+* `anonymous`: Default privilege, no password, no `sudo` privilege
 
 While you are root, do `su - <user>` to switch to a user.
 
