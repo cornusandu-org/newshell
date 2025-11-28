@@ -1,6 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.2
+```diff
+! [Changed] Increased memory limit for building
+! [Changed] Decreased default CPU limit for virtualised instances
+! [Changed] Decreased default stack size for applications running in instances
++ [Added] `sudo` command to GVisor
++ [Added] `sudo` permissions for `user` user
+- [Removed] `sudo` permissions for `anonymous` user
+
 ## 1.0.1
 ```diff
 + [Added] CHANGELOG.md

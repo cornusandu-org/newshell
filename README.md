@@ -30,8 +30,9 @@ Finally, create/edit `/etc/docker/daemon.json` and add/merge this:
 ```json
 {
   "runtimes": {
-    "runsc": {
-      "path": "runsc"
+    "runsc_su": {
+      "path": "runsc",
+      "runtimeArgs": ["--allow-suid"]
     }
   },
   "default-runtime": "runc"
@@ -67,8 +68,21 @@ sudo chmod +x /bin/newshell
 ## Running
 Now, to run, just use the `newshell` command!
 
-## Arguments
+### Arguments
 Too see what arguments newshell takes, run: `newshell help`.
+
+## Other
+### Switching between accounts
+By default, each instance contains three users:
+* `root`: Standard root, full privilege
+* `user`: Default privilege, password-protected (`123456`)
+* `anonymous`: Default privilege, no password
+
+While you are root, do `su - <user>` to switch to a user.
+
+To switch back to root, do `exit`.
+
+To exit the container, while logged as root, do `exit`.
 
 ## Other Documentation
 - **[Changelog](CHANGELOG.md):** List of changes

@@ -1,11 +1,22 @@
 #!/bin/sh
 set -e
 
-# Create users if they don't exist
+# Create users
 id user 2>/dev/null || useradd -m -s /bin/bash user
 id anonymous 2>/dev/null || useradd -m -s /bin/bash anonymous
 
-# Set passwords (optional)
+# Set password
 echo "user:123456" | chpasswd
+
+usermod -aG sudo user
+
+#echo "user ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+touch /etc/sudoers.d/deny-anonymous
+
+echo "anonymous ALL=(ALL) ALL" > /etc/sudoers.d/deny-anonymous
+chmod 440 /etc/sudoers.d/deny-anonymous
+
+gpasswd -d anonymous sudo 2>/dev/null || true
 
 exec "$@"

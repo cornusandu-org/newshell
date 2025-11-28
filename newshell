@@ -11,11 +11,11 @@ to_bytes() {
 }
 
 
-cpu="0.5"
+cpu="0.3"
 memory="64m"
 mem_swap="256m"
 max_file_size="2g"
-stack_size="1m"
+stack_size="128k"
 
 # Parse arguments
 while [ $# -gt 0 ]; do
@@ -52,7 +52,7 @@ echo "  File size max  = $max_file_size  → $fsize_bytes bytes"
 echo "  Stack size max = $stack_size     → $stack_bytes bytes"
 echo ""
 
-sudo docker run --runtime=runsc -it \
+sudo docker run --runtime=runsc_su -it \
     --cpus="$cpu" \
     --cpu-shares="1024" \
     --memory="$memory" \
