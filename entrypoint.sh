@@ -14,9 +14,9 @@ touch /etc/sudoers.d/deny-anonymous
 
 echo "anonymous ALL=(ALL) NOPASSWD: /usr/bin/false
 Defaults:anonymous !authenticate
-" > /etc/sudoers.d/deny-anonymous
+" > /etc/sudoers.d/deny-anonymous 1>/dev/null
 chmod 440 /etc/sudoers.d/deny-anonymous
 
-gpasswd -d anonymous sudo 2>/dev/null || true
+gpasswd -d anonymous sudo 1>/dev/null 2>/dev/null || true
 
 exec "$@"

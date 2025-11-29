@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.1.1
+```diff
+! [Changed] documentation changes
+- [Surpressed] the "removing anonymous from sudo" message
+```
+
 ## 1.1.0
 ```diff
 + [Added] more default tools/packages

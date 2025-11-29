@@ -43,6 +43,7 @@ Now, you might want to reload Docker:
 # With systemctl
 sudo systemctl daemon-reload
 sudo systemctl restart docker
+
 # If you don't have systemctl
 sudo service docker restart
 ```
@@ -56,8 +57,7 @@ The output should list `runsc`.
 ### 2. Building
 To build, simply do:
 ```sh
-chmod +x ./build
-./build
+chmod +x ./build && ./build
 ```
 Or, if you want a smaller build, check [Minimal Builds](###-Minimal-Builds)
 
