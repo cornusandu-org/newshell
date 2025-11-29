@@ -22,6 +22,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gviso
 sudo apt update
 sudo apt install -y runsc
 ```
+
 Then, make sure GVisor was successfully installed (you may need to restart your shell):
 ```sh
 runsc --version
@@ -38,13 +39,14 @@ Finally, create/edit `/etc/docker/daemon.json` and add/merge this:
   "default-runtime": "runc"
 }
 ```
+
 Now, you might want to reload Docker:
 ```sh
 # With systemctl
 sudo systemctl daemon-reload
 sudo systemctl restart docker
 
-# If you don't have systemctl
+# If you don't have systemctl (legacy)
 sudo service docker restart
 ```
 <br>
