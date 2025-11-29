@@ -57,8 +57,10 @@ The output should list `runsc`.
 To build, simply do:
 ```sh
 chmod +x ./build
-sudo ./build
+./build
 ```
+Or, if you want a smaller build, check [Minimal Builds](###-Minimal-Builds)
+
 Now, you'll also want to copy the `newshell` command to bin:
 ```sh
 sudo cp ./newshell /bin/newshell
@@ -72,6 +74,12 @@ Now, to run, just use the `newshell` command!
 Too see what arguments newshell takes, run: `newshell help`.
 
 ## Other
+### Minimal Builds
+To make a minimal build, which only includes a few packages, do:
+```sh
+docker build . -t new_shell --memory=4g --build-arg MINIMAL=true
+```
+
 ### Switching between accounts
 By default, each instance contains three users:
 * `root`: Standard root, full privilege

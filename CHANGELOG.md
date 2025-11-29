@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.4
+```diff
++ [Added] more default tools/packages
+@@ antlr4 antlr4-doc basex basez bashtop bash-doc bash-completion bash-argsparse basix-doc catdoc ddnet grep nmap tcpdump @@
++ [Added] support for minimal build (only keeps a few packages)
+@@ nano sudo build-essential curl p7zip unrar-free mandoc grep @@
+```
+
 ## 1.0.3
 ```diff
 + [Added] more default tools/packages
