@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 + [Added] `sudo` command to GVisor
 + [Added] `sudo` permissions for `user` user
 - [Removed] `sudo` permissions for `anonymous` user
+```
 
 ## 1.0.1
 ```diff
